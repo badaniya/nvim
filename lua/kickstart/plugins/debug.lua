@@ -62,20 +62,24 @@ return {
       --    Feel free to remove or use ones that you like more! :)
       --    Don't feel like these are good choices.
       icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
-      controls = {
-        icons = {
-          pause = '⏸',
-          play = '▶',
-          step_into = '⏎',
-          step_over = '⏭',
-          step_out = '⏮',
-          step_back = 'b',
-          run_last = '▶▶',
-          terminate = '⏹',
-          disconnect = '⏏',
-        },
-      },
+      --controls = {
+      --  icons = {
+      --    pause = '⏸',
+      --    play = '▶',
+      --    step_into = '⏎',
+      --    step_over = '⏭',
+      --    step_out = '⏮',
+      --    step_back = 'b',
+      --    run_last = '▶▶',
+      --    terminate = '⏹',
+      --    disconnect = '⏏',
+      --  },
+      --},
     }
+
+    -- Pretty up the debug breakpoints
+    vim.fn.sign_define('DapBreakpoint', { text = '🔴', texthl = '', linehl = '', numhl = '' })
+    vim.fn.sign_define('DapStopped', { text = '', texthl = '', linehl = '', numhl = '' })
 
     -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
     vim.keymap.set('n', '<F7>', dapui.toggle, { desc = 'Debug: See last session result.' })
@@ -90,6 +94,9 @@ return {
         -- On Windows delve must be run attached or it crashes.
         -- See https://github.com/leoluz/nvim-dap-go/blob/main/README.md#configuring
         detached = vim.fn.has 'win32' == 0,
+        --args = {},
+        --build_flags = '',
+        --cwd = nil,
       },
     }
   end,
