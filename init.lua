@@ -170,6 +170,9 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- Set terminal mapping
 vim.keymap.set('n', '<leader>z', ':split | set nonumber | set norelativenumber | resize 20 | terminal <CR> i', { desc = 'Open [Z]SH terminal' })
 
+-- Set DB UI mapping
+vim.keymap.set('n', '<leader>db', ':DBUIToggle <CR>', { desc = 'Open [D]atabase UI for SQL queries' })
+
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
@@ -564,7 +567,7 @@ require('lazy').setup({
       --  Add any additional override configuration in the following tables. Available keys are:
       --  - cmd (table): Override the default command used to start the server
       --  - filetypes (table): Override the default list of associated filetypes for the server
-      --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
+      --  - capabilities (tnable): Override fields in capabilities. Can be used to disable certain LSP features.
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
@@ -783,6 +786,14 @@ require('lazy').setup({
           { name = 'path' },
         },
       }
+
+      -- Setup vim-dadbod
+      cmp.setup.filetype({ 'sql' }, {
+        sources = {
+          { name = 'vim-dadbod-completion' },
+          { name = 'buffer' },
+        },
+      })
     end,
   },
 
